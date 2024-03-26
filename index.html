@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Location Lookup</title>
+    <script>
+        // Example CSV data converted to JavaScript object
+        var inventoryData = [
+            { barcode: "01108542", location: "Line1 (Row 1, Column 1)" },
+            { barcode: "01103068", location: "Line1 (Row 2, Column 1)" },
+            { barcode: "01107749", location: "Line1 (Row 2, Column 1)" },
+            { barcode: "01107781", location: "Line1 (Row 3, Column 1)" },
+            { barcode: "01097941", location: "Line1 (Row 3, Column 1)" },
+            { barcode: "01102896", location: "Line1 (Row 4, Column 1)" },
+            { barcode: "01102895", location: "Line1 (Row 4, Column 1)" },
+            { barcode: "01108479", location: "Line1 (Row 5, Column 1)" },
+            { barcode: "01107783", location: "Line1 (Row 5, Column 1)" },
+            { barcode: "01107753", location: "Line1 (Row 6, Column 1)" },
+            { barcode: "01102900", location: "Line1 (Row 6, Column 1)" }
+            // Add more data as needed
+        ];
+
+        function lookupLocation() {
+            var code = document.getElementById("codeInput").value;
+            var location = "Location not found";
+
+            // Perform lookup
+            for (var i = 0; i < inventoryData.length; i++) {
+                if (inventoryData[i].barcode === code) {
+                    location = inventoryData[i].location;
+                    break;
+                }
+            }
+
+            document.getElementById("locationResult").innerText = location;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Inventory Location Lookup</h1>
+        <form onsubmit="event.preventDefault(); lookupLocation();">
+            <label for="codeInput">Enter Barcode Code:</label>
+            <input type="text" id="codeInput" name="codeInput" required>
+            <button type="submit">Lookup</button>
+        </form>
+        <div id="locationResult"></div>
+    </div>
+</body>
+</html>
