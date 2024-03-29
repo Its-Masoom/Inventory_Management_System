@@ -1,30 +1,23 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Baloo Bhai 2", sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    background-image: url('first.jpg'); 
+    background-size: cover; /* Adjusts the background image to cover the entire screen */
+    background-position: center; /* Centers the background image */
 }
 
 .container {
-    max-width: 600px;
-    margin: 50px auto;
+    max-width: 90%; /* Adjusted for better responsiveness */
+    margin: 100px auto;
     padding: 20px;
-    background-color: #fff;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
     text-align: center;
-}
-
-.barcode-image {
-    display: block;
-    margin: 0 auto;
-    width: 80%;
-    max-width: 300px;
-    height: auto;
-    margin-bottom: 20px;
+    font-size: 40px;
 }
 
 form {
@@ -37,16 +30,20 @@ label {
 }
 
 input[type="text"] {
-    width: 100%;
+    width: 50%; /* Adjusted for better responsiveness */
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+
 }
 
 button {
     display: block;
-    width: 100%;
+    width: 30%; /* Adjusted for better responsiveness */
     padding: 10px;
     font-size: 16px;
     background-color: #007bff;
@@ -54,6 +51,7 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin: 20px auto;
 }
 
 button:hover {
@@ -61,6 +59,21 @@ button:hover {
 }
 
 #locationResult {
+    width: 60%;
     font-size: 18px;
-    text-align: center;
+    text-align: center; /* Center-align the text */
+    margin: 20px auto; /* Center-align horizontally and add some space around it */
+    padding: 10px; /* Add padding for better readability */
 }
+
+.center-form-text{
+    margin-top: 50px;
+    text-align: center;
+    font-size:x-large;
+    color: rgb(255, 0, 157);
+    font-weight: 700;
+}
+
+
+
+

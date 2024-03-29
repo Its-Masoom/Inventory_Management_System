@@ -1,51 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@400..800&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inventory Location Lookup</title>
+    <link rel="stylesheet" href="style.css" />
     <script>
-        // Example CSV data converted to JavaScript object
-        var inventoryData = [
-            { barcode: "01108542", location: "Line1 (Row 1, Column 1)" },
-            { barcode: "01103068", location: "Line1 (Row 2, Column 1)" },
-            { barcode: "01107749", location: "Line1 (Row 2, Column 1)" },
-            { barcode: "01107781", location: "Line1 (Row 3, Column 1)" },
-            { barcode: "01097941", location: "Line1 (Row 3, Column 1)" },
-            { barcode: "01102896", location: "Line1 (Row 4, Column 1)" },
-            { barcode: "01102895", location: "Line1 (Row 4, Column 1)" },
-            { barcode: "01108479", location: "Line1 (Row 5, Column 1)" },
-            { barcode: "01107783", location: "Line1 (Row 5, Column 1)" },
-            { barcode: "01107753", location: "Line1 (Row 6, Column 1)" },
-            { barcode: "01102900", location: "Line1 (Row 6, Column 1)" }
-            // Add more data as needed
-        ];
+      // Example CSV data converted to JavaScript object
+      var inventoryData = [
+        // Line 1 -----> Column 1
+        { barcode: "01108542", location: "Line1 (Row 1, Column 1)" },
+        { barcode: "01103068", location: "Line1 (Row 2, Column 1)" },
+        { barcode: "01107749", location: "Line1 (Row 2, Column 1)" },
+        { barcode: "01107781", location: "Line1 (Row 3, Column 1)" },
+        { barcode: "01097941", location: "Line1 (Row 3, Column 1)" },
+        { barcode: "01102896", location: "Line1 (Row 4, Column 1)" },
+        { barcode: "01102895", location: "Line1 (Row 4, Column 1)" },
+        { barcode: "01108479", location: "Line1 (Row 5, Column 1)" },
+        { barcode: "01107783", location: "Line1 (Row 5, Column 1)" },
+        { barcode: "01107753", location: "Line1 (Row 6, Column 1)" },
+        { barcode: "01102900", location: "Line1 (Row 6, Column 1)" },
+        // Line 2 -----> Column 12
+        { barcode: "05008352", location: "Line2 (Row 1, Column 12)" },
+        { barcode: "05008068", location: "Line2 (Row 1, Column 12)" },
+        { barcode: "05008008", location: "Line2 (Row 1, Column 12)" },
+        { barcode: "05007357", location: "Line2 (Row 2, Column 12)" },
+        { barcode: "05009030", location: "Line2 (Row 2, Column 12)" },
+        { barcode: "05009041", location: "Line2 (Row 2, Column 12)" },
+        { barcode: "05007648", location: "Line2 (Row 2, Column 12)" },
+        { barcode: "05010055", location: "Line2 (Row 3, Column 12)" },
+        { barcode: "05009607", location: "Line2 (Row 3, Column 12)" },
+        { barcode: "05009603", location: "Line2 (Row 3, Column 12)" },
+        { barcode: "05009604", location: "Line2 (Row 3, Column 12)" },
+        { barcode: "05009333", location: "Line2 (Row 3, Column 12)" },
+        { barcode: "05008547", location: "Line2 (Row 3, Column 12)" },
+        { barcode: "05009525", location: "Line2 (Row 3, Column 12)" },
+        { barcode: "05009957", location: "Line2 (Row 4, Column 12)" },
+        { barcode: "05009955", location: "Line2 (Row 4, Column 12)" },
+        { barcode: "05009958", location: "Line2 (Row 4, Column 12)" },
+        { barcode: "05008179", location: "Line2 (Row 4, Column 12)" },
+        { barcode: "05008548", location: "Line2 (Row 4, Column 12)" },
+        { barcode: "05009784", location: "Line2 (Row 4, Column 12)" },
+        { barcode: "05009783", location: "Line2 (Row 4, Column 12)" },
+        { barcode: "05008768", location: "Line2 (Row 4, Column 12)" },
+        { barcode: "05009565", location: "Line2 (Row 4, Column 12)" },
+        { barcode: "05008888", location: "Line2 (Row 4, Column 12)" },
+        { barcode: "05009608", location: "Line2 (Row 5, Column 12)" },
+        { barcode: "05008007", location: "Line2 (Row 5, Column 12)" },
+        { barcode: "05008238", location: "Line2 (Row 5, Column 12)" },
+        { barcode: "05008150", location: "Line2 (Row 5, Column 12)" },
+        { barcode: "05007716", location: "Line2 (Row 5, Column 12)" },
+        { barcode: "05010041", location: "Line2 (Row 6, Column 12)" },
+        { barcode: "05009930", location: "Line2 (Row 6, Column 12)" },
+        { barcode: "05007718", location: "Line2 (Row 6, Column 12)" },
+        { barcode: "05008291", location: "Line2 (Row 6, Column 12)" },
+        { barcode: "05008067", location: "Line2 (Row 6, Column 12)" },
+        { barcode: "05008088", location: "Line2 (Row 7, Column 12)" },
+        { barcode: "05008087", location: "Line2 (Row 7, Column 12)" },
+        { barcode: "05008237", location: "Line2 (Row 7, Column 12)" },
+        { barcode: "05008110", location: "Line2 (Row 7, Column 12)" },
+        // Line 2 -----> Column 11
+        { barcode: "05007848", location: "Line2 (Row 1, Column 11)" },
+        { barcode: "05007859", location: "Line2 (Row 1, Column 11)" },
+        { barcode: "05009146", location: "Line2 (Row 1, Column 11)" },
+        { barcode: "05007297", location: "Line2 (Row 1, Column 11)" },
+        { barcode: "05009929", location: "Line2 (Row 2, Column 11)" },
+        { barcode: "05008131", location: "Line2 (Row 2, Column 11)" },
+        { barcode: "05008351", location: "Line2 (Row 2, Column 11)" },
+        { barcode: "05008003", location: "Line2 (Row 2, Column 11)" },
+        { barcode: "05007717", location: "Line2 (Row 2, Column 11)" },
+        { barcode: "01149614", location: "Line2 (Row 3, Column 11)" },
+        { barcode: "01139620", location: "Line2 (Row 3, Column 11)" },
+        { barcode: "01147850", location: "Line2 (Row 3, Column 11)" },
+        { barcode: "05008235", location: "Line2 (Row 3, Column 11)" },
+        { barcode: "05008682", location: "Line2 (Row 4, Column 11)" },
+        { barcode: "05008308", location: "Line2 (Row 4, Column 11)" },
+        { barcode: "05008469", location: "Line2 (Row 4, Column 11)" },
+        { barcode: "05008969", location: "Line2 (Row 4, Column 11)" },
+        { barcode: "05008624", location: "Line2 (Row 4, Column 11)" },
+        { barcode: "01139226", location: "Line2 (Row 5, Column 11)" },
+        { barcode: "05009031", location: "Line2 (Row 5, Column 11)" },
+        { barcode: "05008749", location: "Line2 (Row 5, Column 11)" },
+        { barcode: "05008670", location: "Line2 (Row 5, Column 11)" },
+        { barcode: "05008717", location: "Line2 (Row 5, Column 11)" },
+        { barcode: "05008918", location: "Line2 (Row 6, Column 11)" },
+        { barcode: "05008237", location: "Line2 (Row 6, Column 11)" },
+        { barcode: "05009222", location: "Line2 (Row 6, Column 11)" },
+        { barcode: "05008719", location: "Line2 (Row 6, Column 11)" },
+        { barcode: "05006895", location: "Line2 (Row 7, Column 11)" },
+        { barcode: "05007608", location: "Line2 (Row 7, Column 11)" },
+        // Line 2 -----> Column 10
+        { barcode: "01144901", location: "Line2 (Row 1, Column 10)" },
+        { barcode: "01149614", location: "Line2 (Row 1, Column 10)" },
+        { barcode: "01145791", location: "Line2 (Row 2, Column 10)" },
+        { barcode: "01147958", location: "Line2 (Row 2, Column 10)" },
+        { barcode: "01145795", location: "Line2 (Row 3, Column 10)" },
+        { barcode: "01927077", location: "Line2 (Row 3, Column 10)" },
+        { barcode: "01144910", location: "Line2 (Row 4, Column 10)" },
+        { barcode: "01141700", location: "Line2 (Row 4, Column 10)" },
+        { barcode: "01143864", location: "Line2 (Row 4, Column 10)" },
+        { barcode: "01150076", location: "Line2 (Row 5, Column 10)" },
+        { barcode: "01132869", location: "Line2 (Row 5, Column 10)" },
+        { barcode: "01140780", location: "Line2 (Row 5, Column 10)" },
+        { barcode: "01128392", location: "Line2 (Row 5, Column 10)" },
+        { barcode: "01143169", location: "Line2 (Row 5, Column 10)" },
+        { barcode: "01137831", location: "Line2 (Row 5, Column 10)" },
+        { barcode: "01140223", location: "Line2 (Row 5, Column 10)" },
+        { barcode: "01139954", location: "Line2 (Row 5, Column 10)" },
+        { barcode: "01140218", location: "Line2 (Row 6, Column 10)" },
+        { barcode: "01133144", location: "Line2 (Row 6, Column 10)" },
+        { barcode: "01141718", location: "Line2 (Row 6, Column 10)" },
+        { barcode: "01139690", location: "Line2 (Row 6, Column 10)" },
+        { barcode: "01139146", location: "Line2 (Row 6, Column 10)" },
+        { barcode: "01140825", location: "Line2 (Row 6, Column 10)" },
+        { barcode: "01139623", location: "Line2 (Row 7, Column 10)" },
+        { barcode: "02141730", location: "Line2 (Row 7, Column 10)" },
+        // Line 3 -----> Column 12
+        { barcode: "01149613", location: "Line3 (Row 1, Column 12)" },
+        { barcode: "01147563", location: "Line3 (Row 1, Column 12)" },
+        { barcode: "01147960", location: "Line3 (Row 2, Column 12)" },
+        { barcode: "01147846", location: "Line3 (Row 2, Column 12)" },
+        { barcode: "01148118", location: "Line3 (Row 3, Column 12)" },
+        { barcode: "01147849", location: "Line3 (Row 3, Column 12)" },
+        { barcode: "01147388", location: "Line3 (Row 3, Column 12)" },
+        { barcode: "01145387", location: "Line3 (Row 4, Column 12)" },
+        { barcode: "01147064", location: "Line3 (Row 4, Column 12)" },
+        { barcode: "01148212", location: "Line3 (Row 5, Column 12)" },
+        { barcode: "01147851", location: "Line3 (Row 5, Column 12)" },
+        { barcode: "01148442", location: "Line3 (Row 6, Column 12)" },
+        { barcode: "01147560", location: "Line3 (Row 6, Column 12)" },
+        { barcode: "01147386", location: "Line3 (Row 7, Column 12)" },
+        { barcode: "01145803", location: "Line3 (Row 7, Column 12)" },
+        { barcode: "01142441", location: "Line3 (Row 7, Column 12)" },
+        // Line 3 -----> Column 11
+        { barcode: "01148918", location: "Line3 (Row 1, Column 11)" },
+        { barcode: "01148215", location: "Line3 (Row 1, Column 11)" },
+        { barcode: "01147848", location: "Line3 (Row 3, Column 11)" },
+        { barcode: "01148443", location: "Line3 (Row 4, Column 11)" },
+        { barcode: "01149617", location: "Line3 (Row 4, Column 11)" },
+        { barcode: "01147847", location: "Line3 (Row 6, Column 11)" },
+        { barcode: "01149286", location: "Line3 (Row 6, Column 11)" },
+        { barcode: "01149069", location: "Line3 (Row 6, Column 11)" },
+        // Line 3 -----> Column 10 .....2 entries to be added
+        { barcode: "x", location: "Line3 (Row 1, Column 10)" },
+        { barcode: "x", location: "Line3 (Row 1, Column 10)" },
+        // Line 3 -----> Column 9  .....1 entry missing
+        { barcode: "x", location: "Line3 (Row 1, Column 9)" },
+        { barcode: "01147561", location: "Line3 (Row 1, Column 9)" },
+        // Line 3 -----> Column 8
+        { barcode: "01147562", location: "Line3 (Row 1, Column 8)" },
+        { barcode: "01147845", location: "Line3 (Row 1, Column 8)" },
+      ];
 
-        function lookupLocation() {
-            var code = document.getElementById("codeInput").value;
-            var location = "Location not found";
+      function lookupLocation() {
+        var code = document.getElementById("codeInput").value;
+        var locations = []; // Array to store all matching locations
 
-            // Perform lookup
-            for (var i = 0; i < inventoryData.length; i++) {
-                if (inventoryData[i].barcode === code) {
-                    location = inventoryData[i].location;
-                    break;
-                }
-            }
-
-            document.getElementById("locationResult").innerText = location;
+        // Perform lookup
+        for (var i = 0; i < inventoryData.length; i++) {
+          if (inventoryData[i].barcode === code) {
+            locations.push(inventoryData[i].location); // Add matching location to array
+          }
         }
+
+        // Display locations
+        var locationResult = document.getElementById("locationResult");
+        if (locations.length > 0) {
+          locationResult.innerText = "Locations: " + locations.join(", ");
+          locationResult.style.backgroundColor = "#f9f9f9"; // Set background color
+        } else {
+          locationResult.innerText = "Location not found";
+          locationResult.style.backgroundColor = "transparent"; // Remove background color
+        }
+      }
     </script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <h1>Inventory Location Lookup</h1>
-        <form onsubmit="event.preventDefault(); lookupLocation();">
-            <label for="codeInput">Enter Barcode Code:</label>
-            <input type="text" id="codeInput" name="codeInput" required>
-            <button type="submit">Lookup</button>
-        </form>
-        <div id="locationResult"></div>
+      <h1>Masoom's Inventory Location Lookup</h1>
+      <form onsubmit="event.preventDefault(); lookupLocation();">
+        <label class="center-form-text" for="codeInput"
+          >Enter Barcode Code:</label
+        >
+        <input type="text" id="codeInput" name="codeInput" required />
+        <button id="lookupButton" type="submit">Lookup</button>
+      </form>
+      <div id="locationResult"></div>
     </div>
-</body>
+  </body>
 </html>
